@@ -8,28 +8,36 @@
 </head>
 <body>
     <?php 
-    /* Validações
-    funções (filter_input - filter-var)
-    FILTER_VALIDATE_INT
-    FILTER_VALIDATE_EMAIL
-    FILTER_VALIDATE_FLOAT
-    FILTER_VALIDATE_IP
-    FILTER_VALIDATE_URL
-    */
-    
+ 
 ?>
 <?php
 if(isset($_POST['enviar-formulario'])){
+    //Array de erros
     $erros = array();
-    
+    //Validações
     if(!$idade = filter_input(INPUT_POST, 'idade', FILTER_VALIDATE_INT)){
         $erros[] = "idade precisa ser um número inteiro";
     }
+    if(!$email = filter_input(INPUT_POST, 'Email', FILTER_VALIDATE_EMAIL)){
+        $erros[] = "Email inválido";
+    }
+    if(!$peso = filter_input(INPUT_POST, 'peso', FILTER_VALIDATE_FLOAT)){
+        $erros[] = "Peso precisa ser um float";
+    }
+    if(!$IP = filter_input(INPUT_POST, 'IP', FILTER_VALIDATE_IP)){
+        $erros[] = "IP inválido";
+    }
+    if(!$URL = filter_input(INPUT_POST, 'URL', FILTER_VALIDATE_URL)){
+        $erros[] = "URL inválida";
+    }
+    //Exibindo mensagem de erro
     if(!empty($erros)){
         foreach($erros as $erro){
             echo"<li> $erro</li>";
         }
-        
+                 
+    }else{
+        echo "Parabéns seus dados estão corretos!";
     }
 }
 
